@@ -39,3 +39,5 @@ end
 
 # To use debugger
 # gem 'debugger'
+
+# This is a new comment for demo purposes.
