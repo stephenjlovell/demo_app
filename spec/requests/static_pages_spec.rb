@@ -2,8 +2,7 @@ require 'spec_helper'
 
 describe "Static pages" do
   let(:base_title) { "Rails Tutorial" }
-  subject{ page }
-
+  subject { page }
   describe "Home page" do
     before { visit root_path }
     it { should have_selector('h1', text: 'Sample App') }
@@ -24,5 +23,15 @@ describe "Static pages" do
     before { visit contact_path }
     it { should have_selector('h1', text: 'Contact Us') }
     it { should have_selector('title',text: "#{base_title} | Contact Us") }
+  end
+end
+
+describe "Users pages" do
+  let(:base_title) { "Rails Tutorial" }
+  subject { page }  
+  describe "New page" do
+    before {visit signup_path}
+    it { should have_selector('h1', text:'Sign Up') }
+    it { should have_selector('title', text: "#{base_title} | Sign Up") }
   end
 end
