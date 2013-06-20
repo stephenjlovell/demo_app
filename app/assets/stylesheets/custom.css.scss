@@ -161,9 +161,8 @@ aside {
 
 /* forms */
 
-
 input, textarea, select, .uneditable-input {
-  border: 1px solid #bbb;
+  // border: 1px solid #bbb;
   width: 100%;
   padding: 10px;
   margin-bottom: 15px;
@@ -172,4 +171,17 @@ input, textarea, select, .uneditable-input {
 
 input {
   height: auto !important;
+}
+
+#error_explanation {
+  color: #f00;
+  ul {
+    list-style: none;
+    margin: 0 0 18px 0;
+  }
+}
+
+.field_with_errors {  // this currently seems to have no effect on rendered style.
+  @extend .control-group;
+  @extend .error;
 }
