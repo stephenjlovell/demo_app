@@ -1,6 +1,9 @@
 DemoApp::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb
 
+  # Force all access to the app over SSL,  Strict-Transport-Security, and secure cookies.
+  config.force_ssl = true
+
   # Code is not reloaded between requests
   config.cache_classes = true
 
