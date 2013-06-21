@@ -12,7 +12,11 @@
 class User < ActiveRecord::Base
   attr_accessible :name, :email, :password, :password_confirmation
   has_secure_password
-  before_save { email.downcase! }
+
+  before_save do 
+    create_remember_token
+    email.downcase!
+  end
 
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 
@@ -24,5 +28,8 @@ class User < ActiveRecord::Base
   
   # removes the password_digest error message if applicable.
   after_validation { self.errors.messages.delete :password_digest }
-
+  private
+    def create_remember_token
+        self.remember_token = SecureRandom.urlsafe_base64
+    end
 end
