@@ -4,6 +4,7 @@ ruby '1.9.3'
 gem 'rails', '3.2.13'
 gem 'bootstrap-sass', '2.1.0'
 gem 'bcrypt-ruby', '3.0.1'
+gem 'nokogiri', '1.6.0'
 gem 'pg','0.12.2'
 gem 'jquery-rails','2.0.2'
 
@@ -19,8 +20,9 @@ end
 group :test do
   gem 'capybara','1.1.2'
   gem 'sqlite3', '1.3.5'
-  gem 'rb-fchange', '0.0.5'
-  gem 'rb-notifu', '0.0.4'
+  # gem 'rb-fchange', '0.0.5'
+  # gem 'rb-notifu', '0.0.4'
+  gem 'rb-fsevent'
   gem 'factory_girl_rails', '4.1.0'
 end
 
