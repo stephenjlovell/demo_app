@@ -28,7 +28,8 @@ module SessionsHelper
 
   def redirect_back_or(default)
     redirect_to(session[:return_to] || default)
-    session.delete(:return_to)
+    session.delete(:return_to) 
+    # prevents subsequent redirects from visitng protected pages during this session.
   end
 
   def store_location
