@@ -4,13 +4,17 @@ describe "AuthenticationPages" do
 
   subject { page }
 
-  describe "sign in" do
+  describe "sign in page" do
 
     before { visit signin_path }
     it { should have_selector('h1', text: 'Sign In') }
     it { should have_selector('title', text: 'Sign In') }
+    it { should_not have_link('Users',    href: users_path) }        
+    it { should_not have_link('Profile') }
+    it { should_not have_link('Settings') }
+    it { should_not have_link('Sign Out', href: signout_path) }
 
-    describe "sign in" do
+    describe "user sign in" do
       describe "with invalid information" do
 
         before { click_button "Sign In" }
@@ -40,6 +44,12 @@ describe "AuthenticationPages" do
   describe "authorization" do
     describe "for non-signed-in users" do
       let(:user) { FactoryGirl.create(:user) }
+
+      describe "when attempting to destroy another user" do
+        it "should not be able to delete admin users" do
+          expect { admin.delete}.not_to change(User, :count).by(-1)
+        end
+      end
 
       describe "when attempting to visit a protected page" do
         before do
