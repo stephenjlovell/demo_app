@@ -7,7 +7,8 @@
 			<%= render 'fields', f: f %>
 			<%= f.submit "Save Changes", class: "btn btn-large btn-primary" %>
 		<% end %>
-		<%= gravatar_for @user %>
+		
+    <%= gravatar_for @user %>
 		<%= link_to "Change","http://gravatar.com/emails", target: "_blank" %>
 	</div>
 </div>
