@@ -1,5 +1,8 @@
-	class Micropost < ActiveRecord::Base
-  attr_accessible :content, :user_id
+class Micropost < ActiveRecord::Base
+  attr_accessible :content
   belongs_to :user
-  validates :content, :length =>{:maximum => 140}
+  default_scope order: 'microposts.created_at DESC'
+
+  validates :user_id, presence: true
+  
 end

@@ -44,13 +44,7 @@ describe "AuthenticationPages" do
   describe "authorization" do
     describe "for non-signed-in users" do
       let(:user) { FactoryGirl.create(:user) }
-
-      describe "when attempting to destroy another user" do
-        it "should not be able to delete admin users" do
-          expect { admin.delete}.not_to change(User, :count).by(-1)
-        end
-      end
-
+      
       describe "when attempting to visit a protected page" do
         before do
           visit edit_user_path(user)
