@@ -41,6 +41,14 @@ describe "Micropost pages" do
         expect { click_link "Delete" }.to change(Micropost, :count).by(-1)
       end
     end
-  end
 
+    describe "as different user" do
+      let(:different_user) { FactoryGirl.create(:user)}      
+      before do
+        sign_in different_user
+        visit user_path(user)
+      end
+      it { should_not have_link "Delete" }
+    end
+  end
 end
