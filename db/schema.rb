@@ -11,6 +11,8 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
+# schema.rb is updated automatically on on rake db:migrate.
+
 ActiveRecord::Schema.define(:version => 20130628211625) do
 
   create_table "microposts", :force => true do |t|
