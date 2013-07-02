@@ -3,7 +3,7 @@ require 'spec_helper'
 describe User do
   before do
    @user = User.new(name: "Mr. Example", email: "Example@example.com",
-                     password: "foobar", password_confirmation: "foobar")
+                    password: "foobar", password_confirmation: "foobar")
   end
   subject { @user }
   
@@ -15,10 +15,40 @@ describe User do
   it { should respond_to(:password_confirmation) }
   it { should respond_to(:admin) }
   it { should respond_to(:authenticate) }
+
   it { should respond_to(:microposts) }
+  it { should respond_to(:feed) }
+  it { should respond_to(:relationships) }
+  it { should respond_to(:followed_users) }
+  it { should respond_to(:following?) }
+  it { should respond_to(:follow!) }
 
   it { should be_valid }
   it { should_not be_admin }
+
+  describe "following" do
+
+    let(:other_user) { FactoryGirl.create(:user) }
+    before do
+      @user.save
+      @user.follow!(other_user)
+    end
+    it { should be_following(other_user) }
+    its(:followed_users) { should include(other_user) }
+
+    describe "followed user" do
+      subject { other_user }
+      its(:followers) { should include(@user) }
+    end
+
+
+    describe "and unfollowing" do
+      before { @user.unfollow!(other_user) }
+      it { should_not be_following(other_user) }
+      its(:followed_users) { should_not include(other_user) }
+    end
+  end
+
 
   describe "micropost associations" do
     before { @user.save }
@@ -109,7 +139,7 @@ describe User do
   describe "when email format is invalid" do
     it "should be invalid" do
       addresses = %w[user@foo,com user_at_foo.org example.user@foo.
-foo@bar_baz.com foo@bar+baz.com]
+                  foo@bar_baz.com foo@bar+baz.com]
       addresses.each do |invalid_address|
         @user.email = invalid_address
         @user.should_not be_valid
