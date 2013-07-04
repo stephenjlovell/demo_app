@@ -1,4 +1,7 @@
 DemoApp::Application.configure do
+  
+  config.action_mailer.default_url_options = { host: "https://glacial-harbor-1586.herokuapp.com" }
+
   # Settings specified here will take precedence over those in config/application.rb
 
   # Force all access to the app over SSL,  Strict-Transport-Security, and secure cookies.
