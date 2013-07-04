@@ -1,5 +1,7 @@
 DemoApp::Application.routes.draw do
 
+  get "ardens_controller/edit"
+
   resources :microposts, only: [:create, :destroy]
   resources :sessions, only: [:new, :create, :destroy]
   resources :relationships, only: [:create, :destroy]
