@@ -45,6 +45,7 @@ class UsersController < ApplicationController
         flash[:success] = "Welcome to the Sample App!"
         sign_in @user
         redirect_to @user
+        UserMailer.welcome(@user).deliver
       else
         render 'new'
       end
