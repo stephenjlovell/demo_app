@@ -8,7 +8,6 @@ gem 'bootstrap-will_paginate', '0.0.6'
 gem 'bcrypt-ruby', '3.0.1'
 gem 'faker', '1.0.1'
 gem 'jquery-rails','2.0.2'
-gem 'figaro'
 
 group :test do
   gem 'capybara','1.1.2'

@@ -1,5 +1,5 @@
 class UserMailer < ActionMailer::Base
-  default from: Figaro.env.gmail_username
+  default from: "slovell@example.com"
 
   def password_reset(user)
     @user = user
