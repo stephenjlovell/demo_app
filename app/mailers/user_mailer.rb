@@ -3,7 +3,7 @@ class UserMailer < ActionMailer::Base
 
   def password_reset(user)
     @user = user
-    mail to: @user.email, subject: "Password Reset for your Sample App account"
+    mail to: @user.email, subject: "Password reset for your Sample App account"
   end
 
   def welcome(user)

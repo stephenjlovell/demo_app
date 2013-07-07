@@ -25,6 +25,9 @@ class User < ActiveRecord::Base
             uniqueness: {case_sensitive: false} 
   validates :password, presence: true, length: { minimum: 6 }
   validates :password_confirmation, presence: true
+
+  # removes the password_digest error message if applicable:
+  after_validation { self.errors.messages.delete :password_digest }
   
   def feed
     Micropost.from_users_followed_by(self)
@@ -42,13 +45,12 @@ class User < ActiveRecord::Base
     self.relationships.find_by_followed_id(other_user.id).destroy
   end
 
-  def send_password_reset_email
-    create_password_reset_token
+  def send_password_reset_email # called from Create action of PasswordResetsController
+    self.password_reset_token = SecureRandom.urlsafe_base64
+    self.password_reset_time = Time.zone.now
+    self.save! validate: false
     UserMailer.password_reset(self).deliver
   end
-
-  # removes the password_digest error message if applicable:
-  after_validation { self.errors.messages.delete :password_digest }
 
   private
     def create_remember_token
@@ -56,9 +58,7 @@ class User < ActiveRecord::Base
     end
     def create_password_reset_token
       self.password_reset_token = SecureRandom.urlsafe_base64
-      self.password_reset_time = Time.now
-      self.save! validate: false
-    end
+    end 
 end
 
 

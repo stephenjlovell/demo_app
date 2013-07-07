@@ -1,7 +1,6 @@
 class PasswordResetsController < ApplicationController
   
   def new
-    
   end
 
   def create
@@ -16,15 +15,14 @@ class PasswordResetsController < ApplicationController
     @user = User.find_by_password_reset_token!(params[:id])
   end
 
-  def update
+  def update  #called from submission of the the password_resets edit form.
     @user = User.find_by_password_reset_token!(params[:id])
-    if @user.password_reset_time > 2.hours.ago 
+    if @user.password_reset_time < 2.hours.ago 
       redirect_to new_password_reset_path, alert: "Password reset link has expired."
-    elsif @user.update_attributes(params[:user])
+    elsif @user.update_attributes(params[:user]) # returns false if user object invalid.
       redirect_to signin_path, notice: "Password has been reset."
     else
       render 'edit'
     end
   end
-
 end
