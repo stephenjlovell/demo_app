@@ -1,3 +1,5 @@
+require 'will_paginate/array'
+
 class User < ActiveRecord::Base
 
   attr_accessible :name, :email, :password, :password_confirmation, :password_reset_token, :password_reset_time, :account_activation_token
@@ -38,10 +40,20 @@ class User < ActiveRecord::Base
   # removes the password_digest error message if applicable:
   after_validation { self.errors.messages.delete :password_digest }
 
+# Class methods:
+  def self.search(query_term = nil)
+    if query_term && query_term != ''
+      self.where('name LIKE ?', query_term)
+    else
+      self.all
+    end
+  end
+
+# Instance methods:
   def active?
     self.account_status == "active"
   end
-  
+
   def feed
     Micropost.from_users_followed_by(self)
   end

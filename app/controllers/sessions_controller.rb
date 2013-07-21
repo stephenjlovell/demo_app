@@ -5,10 +5,11 @@ class SessionsController < ApplicationController
 
   def create  
     user = User.find_by_email(params[:email].downcase)
+    
     if user && user.authenticate(params[:password]) && user.active?
       sign_in user
       redirect_back_or user
-    elsif !user.active?
+    elsif user && !user.active?
       flash.now[:error] = 'Please activate your account via the welcome email before logging in.'
       render 'new' 
     else
