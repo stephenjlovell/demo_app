@@ -43,7 +43,7 @@ class User < ActiveRecord::Base
 # Class methods:
   def self.search(query_term = nil)
     if query_term && query_term != ''
-      self.where('name LIKE ?', query_term)
+      self.where('name LIKE ?', "%#{query_term}%")
     else
       self.all
     end
