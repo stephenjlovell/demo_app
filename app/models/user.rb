@@ -1,7 +1,6 @@
 class User < ActiveRecord::Base
-  
-  attr_accessible :name, :email, :password, :password_confirmation, 
-                  :password_reset_token, :password_reset_time
+
+  attr_accessible :name, :email, :password, :password_confirmation, :password_reset_token, :password_reset_time, :account_activation_token
 
   has_many :microposts, dependent: :destroy
 
@@ -15,7 +14,17 @@ class User < ActiveRecord::Base
 
   before_save do 
     create_remember_token
+    create_account_activation_token
     email.downcase!
+  end
+
+  state_machine :account_status, initial: :inactive do
+    event :activate_user do
+      transition inactive: :active
+    end
+    event :deactivate_user do
+      transition active: :inactive
+    end
   end
 
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
@@ -23,11 +32,15 @@ class User < ActiveRecord::Base
   validates :name, presence: true, length: { maximum: 50 }
   validates :email, presence: true, format: {with: VALID_EMAIL_REGEX }, 
             uniqueness: {case_sensitive: false} 
-  validates :password, presence: true, length: { minimum: 6 }
-  validates :password_confirmation, presence: true
+  # validates :password, presence: true, length: { minimum: 6 }
+  # validates :password_confirmation, presence: true
 
   # removes the password_digest error message if applicable:
   after_validation { self.errors.messages.delete :password_digest }
+
+  def active?
+    self.account_status == "active"
+  end
   
   def feed
     Micropost.from_users_followed_by(self)
@@ -59,6 +72,9 @@ class User < ActiveRecord::Base
     def create_password_reset_token
       self.password_reset_token = SecureRandom.urlsafe_base64
     end 
+    def create_account_activation_token
+      self.account_activation_token = SecureRandom.urlsafe_base64
+    end
 end
 
 

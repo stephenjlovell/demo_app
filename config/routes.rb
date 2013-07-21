@@ -1,12 +1,9 @@
 DemoApp::Application.routes.draw do
-
-  get "ardens_controller/edit"
-
   resources :microposts, only: [:create, :destroy]
   resources :sessions, only: [:new, :create, :destroy]
   resources :relationships, only: [:create, :destroy]
   resources :password_resets
-  
+  resources :account_activations
   resources :users do
     member do
       get :following, :followers
@@ -22,6 +19,8 @@ DemoApp::Application.routes.draw do
   match '/signup',  to: 'users#new'
   match '/signin', to: 'sessions#new'
   match '/signout', to: 'sessions#destroy', via: :delete
+
+
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

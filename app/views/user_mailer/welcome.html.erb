@@ -7,6 +7,9 @@
     <h2>Welcome to the Sample App!</h2>
 
     <p>Welcome aboard my modest RoR <%= link_to "sample application", root_path %>, 
-      based on the excellent <a href="http://railstutorial.org/help">Rails Tutorial</a> by Michael Hartl.  Enjoy all the primitive social media goodness!  -SJL</p>
+      based on the excellent <a href="http://railstutorial.org/help">Rails Tutorial</a> by Michael Hartl.
+
+      To confirm your email and activate your account, please <%= link_to "click here", account_activation_url(@user.account_activation_token) %>.
+      Enjoy!  -SJL</p>
   </body>
 </html>

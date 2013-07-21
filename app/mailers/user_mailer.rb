@@ -10,5 +10,4 @@ class UserMailer < ActionMailer::Base
     @user = user
     mail to: @user.email, subject: "Welcome to the Sample App!"
   end
-
 end
