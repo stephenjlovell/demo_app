@@ -34,8 +34,8 @@ class User < ActiveRecord::Base
   validates :name, presence: true, length: { maximum: 50 }
   validates :email, presence: true, format: {with: VALID_EMAIL_REGEX }, 
             uniqueness: {case_sensitive: false} 
-  # validates :password, presence: true, length: { minimum: 6 }
-  # validates :password_confirmation, presence: true
+  validates :password, presence: true, length: { minimum: 6 }
+  validates :password_confirmation, presence: true
 
   # removes the password_digest error message if applicable:
   after_validation { self.errors.messages.delete :password_digest }
@@ -81,9 +81,6 @@ class User < ActiveRecord::Base
     def create_remember_token
       self.remember_token = SecureRandom.urlsafe_base64
     end
-    def create_password_reset_token
-      self.password_reset_token = SecureRandom.urlsafe_base64
-    end 
     def create_account_activation_token
       self.account_activation_token = SecureRandom.urlsafe_base64
     end
