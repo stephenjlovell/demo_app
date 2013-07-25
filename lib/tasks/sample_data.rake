@@ -18,11 +18,14 @@ def make_users
     email = "example-#{n+1}@railstutorial.org"
     password  = "password"
     status = "active"
-    User.create!(name:     name,
-                 email:    email,
-                 password: password,
-                 password_confirmation: password,
-                 account_status: status )
+    user = User.new do |u|
+      u.name = name
+      u.email = email
+      u.password = password
+      u.password_confirmation = password_confirmation
+    end
+    user.save
+    user.update_column(account_status: "active")
   end
 end
 
