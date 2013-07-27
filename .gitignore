@@ -16,3 +16,6 @@
 
 # Ignore all local environment variables.
 /config/local_env.yml
+
+# Ignore sandbox for testing longer functions without manual entry into Rails Console
+/sandbox.rb

@@ -2,7 +2,8 @@ require 'will_paginate/array'
 
 class User < ActiveRecord::Base
 
-  attr_accessible :name, :email, :password, :password_confirmation, :password_reset_token, :password_reset_time, :account_activation_token
+  attr_accessible :name, :email, :password, :password_confirmation, :password_reset_token, 
+                  :password_reset_time, :account_activation_token, :account_status
 
   has_many :microposts, dependent: :destroy
 
@@ -32,8 +33,8 @@ class User < ActiveRecord::Base
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 
   validates :name, presence: true, length: { maximum: 50 }
-  validates :email, presence: true, format: {with: VALID_EMAIL_REGEX }, 
-            uniqueness: {case_sensitive: false} 
+  validates :email, presence: true, format: { with: VALID_EMAIL_REGEX }, 
+            uniqueness: { case_sensitive: false } 
   validates :password, presence: true, length: { minimum: 6 }
   validates :password_confirmation, presence: true
 
