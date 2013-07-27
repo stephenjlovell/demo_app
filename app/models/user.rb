@@ -22,10 +22,10 @@ class User < ActiveRecord::Base
   end
 
   state_machine :account_status, initial: :inactive do
-    event :activate_user do
+    event :activate do
       transition inactive: :active
     end
-    event :deactivate_user do
+    event :deactivate do
       transition active: :inactive
     end
   end

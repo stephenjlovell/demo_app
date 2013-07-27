@@ -1,6 +1,6 @@
 DemoApp::Application.configure do
   
-  config.action_mailer.default_url_options = { host: "https://glacial-harbor-1586.herokuapp.com" }
+  config.action_mailer.default_url_options = { host: "glacial-harbor-1586.herokuapp.com" }
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.perform_deliveries = true
 
