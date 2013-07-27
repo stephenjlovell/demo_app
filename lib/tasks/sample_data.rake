@@ -13,19 +13,17 @@ def make_users
                        password: "foobar",
                        password_confirmation: "foobar")
   admin.toggle!(:admin)
+
   99.times do |n|
-    name  = Faker::Name.name
     email = "example-#{n+1}@railstutorial.org"
-    password  = "password"
-    status = "active"
     user = User.new do |u|
-      u.name = name
+      u.name = Faker::Name.name
       u.email = email
-      u.password = password
-      u.password_confirmation = password_confirmation
+      u.password = "password"
+      u.password_confirmation = "password"
+      u.account_status = "active"
     end
-    user.save
-    user.update_column(account_status: "active")
+    user.save(validate: false)
   end
 end
 
