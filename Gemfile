@@ -20,6 +20,7 @@ end
 
 group :development do
   gem 'annotate', '2.5.0'
+  gem 'pg','0.12.2'
 end
 
 group :development, :test do
@@ -27,8 +28,8 @@ group :development, :test do
   gem 'guard-rspec', '1.2.1'
 end
 
-group :development, :production do
-  gem 'pg','0.12.2'
+group :production do
+  gem 'mysql2'
 end
 
 group :assets do
