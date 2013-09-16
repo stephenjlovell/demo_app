@@ -10,13 +10,7 @@ gem 'faker', '1.0.1'
 gem 'jquery-rails','2.0.2'
 gem "state_machine", "~> 1.2.0"
 
-group :test do
-  gem 'capybara','1.1.2'
-  gem 'sqlite3', '1.3.5'
-
-  gem 'rb-fsevent', '0.9.1', :require => false
-  gem 'factory_girl_rails', '4.1.0'
-end
+gem 'aws-sdk'
 
 group :development do
   gem 'annotate', '2.5.0'
@@ -26,6 +20,14 @@ end
 group :development, :test do
   gem 'rspec-rails', '2.11.0'
   gem 'guard-rspec', '1.2.1'
+end
+
+group :test do
+  gem 'capybara','1.1.2'
+  gem 'sqlite3', '1.3.5'
+
+  gem 'rb-fsevent', '0.9.1', :require => false
+  gem 'factory_girl_rails', '4.1.0'
 end
 
 group :production do
