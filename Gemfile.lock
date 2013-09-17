@@ -180,7 +180,7 @@ PLATFORMS
 
 DEPENDENCIES
   annotate (= 2.5.0)
-  aws-sdk
+  aws-sdk (~> 1.0)
   bcrypt-ruby (= 3.0.1)
   bootstrap-sass (= 2.1.0)
   bootstrap-will_paginate (= 0.0.6)

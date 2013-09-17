@@ -10,7 +10,7 @@ gem 'faker', '1.0.1'
 gem 'jquery-rails','2.0.2'
 gem "state_machine", "~> 1.2.0"
 
-gem 'aws-sdk'
+gem 'aws-sdk', '~> 1.0'
 
 group :development do
   gem 'annotate', '2.5.0'
