@@ -19,4 +19,5 @@
 
 # Ignore sandbox for testing longer functions without manual entry into Rails Console
 /sandbox.rb
+/.elasticbeanstalk/
 .elasticbeanstalk/
